@@ -1,0 +1,14 @@
+{
+  "dashboard": {
+    "title": "Financial Dashboard",
+    "subtitle": "Real-time overview of your store's true performance",
+    "metrics": {
+      "takeHomePay": "Take-Home Pay",
+      "netProfit": "Net Profit",
+      "totalRevenue": "Total Revenue",
+      "lockedCapital": "Locked Capital in Stock"
+    },
+    "recentActivity": "Recent Financial Activity",
+    "viewReports": "View Detailed Reports"
+  }
+}

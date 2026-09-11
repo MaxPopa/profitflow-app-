@@ -1,0 +1,44 @@
+import { json } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
+import { Page, Layout, Card, Text, BlockStack, InlineGrid } from "@shopify/polaris";
+import enTranslations from "../locales/en.json";
+
+export async function loader() {
+  return json({
+    t: enTranslations.dashboard2,
+    advancedMetrics: {
+      adSpend: "$2,150.00",
+      shippingCost: "$840.00"
+    }
+  });
+}
+
+export default function Dashboard2() {
+  const { t, advancedMetrics } = useLoaderData();
+
+  return (
+    <Page title={t.title} subtitle={t.subtitle}>
+      <BlockStack gap="500">
+        <Layout>
+          <Layout.Section>
+            <Card>
+              <BlockStack gap="400">
+                <Text variant="headingMd" as="h2">Performance Breakdown</Text>
+                <InlineGrid columns={{ xs: 1, sm: 2 }} gap="400">
+                  <BlockStack gap="200">
+                    <Text variant="bodyMd" tone="subdued">Total Ad Spend</Text>
+                    <Text variant="headingLg" as="p">{advancedMetrics.adSpend}</Text>
+                  </BlockStack>
+                  <BlockStack gap="200">
+                    <Text variant="bodyMd" tone="subdued">Shipping & Fulfillment</Text>
+                    <Text variant="headingLg" as="p">{advancedMetrics.shippingCost}</Text>
+                  </BlockStack>
+                </InlineGrid>
+              </BlockStack>
+            </Card>
+          </Layout.Section>
+        </Layout>
+      </BlockStack>
+    </Page>
+  );
+}

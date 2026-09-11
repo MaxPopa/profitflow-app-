@@ -1,0 +1,73 @@
+import { json } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
+import { Page, Layout, Card, Text, DataTable, BlockStack, InlineGrid } from "@shopify/polaris";
+
+export async function loader({ request }) {
+  const summaryData = {
+    revenue: "€45,850.00",
+    totalCosts: "€28,120.00",
+    netProfit: "€17,730.00",
+    takeHomePay: "€13,829.40", // După deducerea taxelor/impozitelor
+    margin: "38.6%",
+  };
+
+  const dailyRows = [
+    ["2026-09-01", "14", "€1,420.00", "€850.00", "€570.00", "40.1%"],
+    ["2026-09-02", "19", "€2,100.00", "€1,280.00", "€820.00", "39.0%"],
+    ["2026-09-03", "22", "€2,450.00", "€1,500.00", "€950.00", "38.8%"],
+  ];
+
+  return json({ summaryData, dailyRows });
+}
+
+export default function ProfitFlowDashboard() {
+  const { summaryData, dailyRows } = useLoaderData<typeof loader>();
+
+  return (
+    <Page 
+      title="ProfitFlow Analytics" 
+      subtitle="Real-time profit tracking, tax estimates, and financial clarity."
+      primaryAction={{ content: "Export PDF Report", onAction: () => alert("Generating PDF...") }}
+    >
+      <BlockStack gap="500">
+        <InlineGrid columns={{ xs: 1, sm: 2, md: 4 }} gap="400">
+          <Card>
+            <BlockStack gap="200">
+              <Text tone="subdued" variant="bodyMd">Total Revenue</Text>
+              <Text variant="headingXl" as="h2">{summaryData.revenue}</Text>
+            </BlockStack>
+          </Card>
+          <Card>
+            <BlockStack gap="200">
+              <Text tone="subdued" variant="bodyMd">Total Costs & Expenses</Text>
+              <Text variant="headingXl" as="h2">{summaryData.totalCosts}</Text>
+            </BlockStack>
+          </Card>
+          <Card>
+            <BlockStack gap="200">
+              <Text tone="subdued" variant="bodyMd">Net Profit</Text>
+              <Text variant="headingXl" as="h2" tone="success">{summaryData.netProfit}</Text>
+            </BlockStack>
+          </Card>
+          <Card background="bg-surface-active">
+            <BlockStack gap="200">
+              <Text tone="subdued" variant="bodyMd">Take-Home Pay (After Tax)</Text>
+              <Text variant="headingXl" as="h2" tone="magic">{summaryData.takeHomePay}</Text>
+            </BlockStack>
+          </Card>
+        </InlineGrid>
+
+        <Card>
+          <BlockStack gap="300">
+            <Text variant="headingMd" as="h3">Recent Daily Performance</Text>
+            <DataTable
+              columnContentTypes={['text', 'numeric', 'numeric', 'numeric', 'numeric', 'numeric']}
+              headings={['Date', 'Orders', 'Revenue', 'Total Costs', 'Net Profit', 'Margin']}
+              rows={dailyRows}
+            />
+          </BlockStack>
+        </Card>
+      </BlockStack>
+    </Page>
+  );
+}

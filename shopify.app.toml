@@ -1,0 +1,9 @@
+Name = "ProfitFlow"
+client_id = "a7f2d8c1b3978ca1081892"
+application_url = "https://profitflow-app.onrender.com"
+embedded = true
+
+[auth]
+redirect_urls = [
+  "https://profitflow-app.onrender.com/api/auth/callback"
+]

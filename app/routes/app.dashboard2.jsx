@@ -1,0 +1,34 @@
+import { json } from "@remix-run/node";
+import { Page, Layout, Card, Text, BlockStack, Button, InlineStack } from "@shopify/polaris";
+
+export async function loader() {
+  return json({});
+}
+
+export default function Dashboard2() {
+  return (
+    <Page>
+      <BlockStack gap="500">
+        <Layout>
+          <Layout.Section>
+            <Card>
+              <BlockStack gap="400">
+                <Text variant="headingXl" as="h1">
+                  ProfitFlow Advanced Dashboard
+                </Text>
+                <Text tone="subdued" as="p">
+                  Toate funcțiile sunt deblocate și gata de utilizare.
+                </Text>
+                <InlineStack gap="300">
+                  <Button url="/app/app.simulator">Profit Simulator</Button>
+                  <Button url="/app/app.calendar">Profit Calendar</Button>
+                  <Button url="/app/app.reports">Reports</Button>
+                </InlineStack>
+              </BlockStack>
+            </Card>
+          </Layout.Section>
+        </Layout>
+      </BlockStack>
+    </Page>
+  );
+}

@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.sqlite"
+}
+
+model Session {
+  id          String    @id
+  shop        String    @unique
+  state       String
+  isOnline    Boolean   @default(false)
+  scope       String?
+  expires     DateTime?
+  accessToken String
+  userId      BigInt?
+}
+
+model ShopPlan {
+  id           String   @id @default(cuid())
+  shop         String   @unique
+  planName     String   @default("STANDARD") // "STANDARD" ($49) sau "ENTERPRISE"
+  orderCount   Int      @default(0)          // Contorizează comenzile din luna curentă
+  renewalDate  DateTime                      // Data la care se resetează contorul de comenzi
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}

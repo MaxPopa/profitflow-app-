@@ -1,0 +1,19 @@
+# Fișierul de configurare principal pentru ProfitFlow
+client_id = ""
+name = "ProfitFlow"
+handle = "profitflow"
+application_url = "https://profitflow-app.onrender.com"
+embedded = true
+
+[build]
+automatically_update_urls_on_dev = true
+
+[access_scopes]
+# Permisiunile necesare pentru citirea comenzilor și produselor
+scopes = "read_orders,write_orders,read_products"
+
+[webhooks]
+api_version = "2025-07"
+
+[api]
+api_version = "2025-07"

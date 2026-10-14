@@ -1,8 +1,0 @@
-name = "ProfitFlow"
-handle = "profitflow"
-client_id = ""
-application_url = "https://profitflow-app.onrender.com"
-embedded = true
-
-[api]
-api_version = "2025-07"
